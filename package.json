@@ -60,7 +60,8 @@
     "lint": "eslint .",
     "pods": "cd ios && pod install && cd ..",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "iphone": "react-native run-ios --simulator='iPhone 15 Pro'"
   },
   "version": "0.0.1"
 }
