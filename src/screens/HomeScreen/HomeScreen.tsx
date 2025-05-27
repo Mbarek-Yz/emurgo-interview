@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
 import {useLazyFetchPostsQuery} from '_rtkQuery/api/topHeadNewsApi';
 import {translate} from '_i18n';
 import useCustomPaginationQuery from '_rtkQuery/hooks/useCustomPaginationQuery';
 import CustomFlatList from '_components/CustomFlatList/CustomFlatlist';
 import styles from './homeScreenStyles';
+import CustomSearchBar from '_components/CustomSearchBar/CustomSearchBar';
+import {useSearch} from '_rtkQuery/hooks/useSearch';
 
 const HomeScreen: React.FC = () => {
   const useLazyFetchPostsQueryResult = useLazyFetchPostsQuery();
+  const {debouncedSearchText, searchText, setSearchText} = useSearch();
 
   const {
     data,
@@ -20,8 +23,12 @@ const HomeScreen: React.FC = () => {
     isRefreshing,
     loadingMoreError,
   } = useCustomPaginationQuery(useLazyFetchPostsQueryResult, {
-    pageSize: 10,
+    q: searchText,
   });
+
+  useEffect(() => {
+    getRefreshedData();
+  }, [debouncedSearchText]);
 
   const renderItem = ({item}: {item: any}) => {
     return (
@@ -43,8 +50,12 @@ const HomeScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>{translate('home.title')}</Text>
-
+      {/* <Text style={styles.header}>{translate('home.title')}</Text> */}
+      <CustomSearchBar
+        placeholder="Search..."
+        text={searchText}
+        onChangeText={setSearchText}
+      />
       <View style={styles.listContainer}>
         <CustomFlatList
           data={data}

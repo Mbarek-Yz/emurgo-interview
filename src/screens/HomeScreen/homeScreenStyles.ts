@@ -3,7 +3,8 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    padding: 16,
+    backgroundColor: 'lightgrey',
   },
   listContainer: {
     flex: 1,
@@ -21,8 +22,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     padding: 16,
-    margin: 8,
-    marginHorizontal: 16,
+    marginVertical: 8,
     backgroundColor: '#ffffff',
     borderRadius: 8,
     shadowColor: '#000',
