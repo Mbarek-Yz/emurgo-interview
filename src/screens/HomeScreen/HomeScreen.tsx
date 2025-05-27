@@ -2,16 +2,19 @@ import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import React from 'react';
 
 import {useGetTopHeadlinesQuery} from '_rtkQuery/api/topHeadNewsApi';
+import {translate} from '_i18n';
 
 const HomeScreen: React.FC = () => {
-  const {data, error, isLoading} = useGetTopHeadlinesQuery({});
+  const {data, error, isLoading} = useGetTopHeadlinesQuery();
 
   if (isLoading) return <ActivityIndicator size="large" color="#0000ff" />;
   if (error) return <Text>Error fetching news: {error.message}</Text>;
 
   return (
     <View style={{padding: 20}}>
-      <Text style={{fontSize: 18, marginVertical: 20}}>Top Headlines</Text>
+      <Text style={{fontSize: 18, marginVertical: 20}}>
+        {translate('home.title')}
+      </Text>
 
       <FlatList
         data={data}

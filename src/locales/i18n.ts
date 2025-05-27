@@ -8,8 +8,8 @@ import en, {TranslationsType} from '_languages/en';
 
 const i18nInstance = i18n.createInstance();
 export const appLanguage: string = IS_IOS
-  ? NativeModules.SettingsManager.settings.AppleLocale ||
-    NativeModules.SettingsManager.settings.AppleLanguages[0]
+  ? NativeModules.SettingsManager.getConstants().settings.AppleLocale ||
+    NativeModules.SettingsManager.getConstants().AppleLanguages[0]
   : NativeModules.I18nManager.localeIdentifier;
 
 i18nInstance
