@@ -1,13 +1,14 @@
 import {useEffect, useState} from 'react';
 import Toast from 'react-native-toast-message';
 
-import isEqual from 'lodash.isequal';
+import deepEqual from 'fast-deep-equal';
 
 import {QueryStatus} from '@reduxjs/toolkit/query';
 import {
   type TypedUseLazyQuery,
   type TypedUseQueryStateResult,
 } from '@reduxjs/toolkit/query/react';
+import type {TypedUseLazyQueryStateResult} from '@reduxjs/toolkit/query/react';
 import {
   DEFAULT_PAGE_NUMBER,
   DEFAULT_ROWS_PER_PAGE,
@@ -25,8 +26,7 @@ const useCustomPaginationQuery = <T, D = void>(
   useLazyQueryResult: ReturnType<TypedUseLazyQuery<List<T>, any, any>>,
   params?: Partial<D>,
   pageArgName = 'page',
-  rowsPerPageArgName = 'rowsPerPage',
-  // eslint-disable-next-line sonarjs/cognitive-complexity
+  rowsPerPageArgName = 'pageSize',
 ) => {
   const [currentPage, setCurrentPage] = useState(INITIAL_PAGE_NUMBER);
   const [oldArgs, setOldArgs] = useState<any>();
@@ -37,10 +37,9 @@ const useCustomPaginationQuery = <T, D = void>(
     error,
     isFetching,
     isLoading: isDefaultLoading,
-    // eslint-disable-next-line sonarjs/deprecation
     status,
     originalArgs,
-  } = stateResult as TypedUseQueryStateResult<T, any, any>;
+  } = stateResult as TypedUseLazyQueryStateResult<T, any, any>;
   const pageArg: number = originalArgs?.[pageArgName];
   const filteredOriginalArgs =
     originalArgs &&
@@ -49,10 +48,7 @@ const useCustomPaginationQuery = <T, D = void>(
         ([key]) => key !== pageArgName && key !== rowsPerPageArgName,
       ),
     );
-  /**
-   * note that the dataObject represents the decoded response which is an object with a key of 'data'
-   * @example {data: []}
-   */
+
   const newDataObject = dataObject as
     | {
         data: T[];
@@ -66,7 +62,7 @@ const useCustomPaginationQuery = <T, D = void>(
   const isLoading: boolean =
     (data === undefined && isDefaultLoading) ||
     (isFetching && data?.length === 0) ||
-    (!isEqual(oldArgs, filteredOriginalArgs) &&
+    (!deepEqual(oldArgs, filteredOriginalArgs) &&
       isFetching &&
       pageArg === DEFAULT_PAGE_NUMBER);
 
@@ -79,7 +75,7 @@ const useCustomPaginationQuery = <T, D = void>(
     data !== undefined &&
     data.length > 0 &&
     pageArg === DEFAULT_PAGE_NUMBER &&
-    isEqual(oldArgs, filteredOriginalArgs) &&
+    deepEqual(oldArgs, filteredOriginalArgs) &&
     isFetching;
   const refreshError: string | undefined =
     data !== undefined &&

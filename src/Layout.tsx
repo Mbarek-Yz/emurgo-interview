@@ -8,7 +8,9 @@ import LoginScreen from '_screens/LoginScreen/LoginScreen';
 const Layout = () => {
   const isLoggedIn = useAppSelector(selectUser).isLoggedIn;
   return (
-    <SafeAreaView>{isLoggedIn ? <HomeScreen /> : <LoginScreen />}</SafeAreaView>
+    <SafeAreaView style={{flex: 1}}>
+      <HomeScreen />
+    </SafeAreaView>
   );
 };
 

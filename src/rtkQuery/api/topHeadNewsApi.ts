@@ -1,29 +1,76 @@
-import {createApi} from '@reduxjs/toolkit/query/react';
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {Articles, decodeArticles} from '_models/Articles/Articles';
 import {baseQueryConfig} from '_rtkQuery/utils/rtkQuery.constants';
-import {endpoints} from '_utils/endpoints';
-import {HttpMethodEnum} from '_utils/enums';
+import {
+  getMergeConfig,
+  getSerializeQueryArgsConfig,
+} from '_rtkQuery/utils/rtkQuery.helpers';
+import {endpoints, BASE_URL} from '_utils/endpoints';
 
 type TopHeadlinesResponse = {
   articles: Articles[];
+  totalResults: number;
+};
+
+type PaginatedArticlesResponse = {
+  data: Articles[];
+  totalNbrOfResults: number;
 };
 
 export const topHeadNewsApi = createApi({
-  reducerPath: 'topHeadPath',
-  baseQuery: baseQueryConfig,
+  reducerPath: 'topHeadNewsApi',
+  baseQuery: fetchBaseQuery({
+    ...baseQueryConfig,
+    baseUrl: BASE_URL,
+  }),
   endpoints: builder => ({
-    getTopHeadlines: builder.query<ReturnType<typeof decodeArticles>, void>({
-      query: () => ({
-        url: endpoints.TOP_HEADLINES,
-        method: HttpMethodEnum.Get,
-      }),
-      transformResponse: (response: TopHeadlinesResponse) => {
-        return decodeArticles(response.articles);
+    fetchPosts: builder.query<
+      PaginatedArticlesResponse,
+      {
+        page: number;
+        pageSize: number;
+        q?: string;
+        from?: string;
+        sortBy?: string;
+      }
+    >({
+      query: ({page, pageSize, q, from, sortBy}) => {
+        const params = {
+          ...endpoints.DEFAULT_PARAMS,
+          page,
+          pageSize,
+          ...(q && {q}),
+          ...(from && {from}),
+          ...(sortBy && {sortBy}),
+        };
+
+        return {
+          url: endpoints.TOP_HEADLINES,
+          params,
+        };
+      },
+      transformResponse: (
+        response: TopHeadlinesResponse,
+      ): PaginatedArticlesResponse => {
+        if (!response?.articles) {
+          return {data: [], totalNbrOfResults: 0};
+        }
+
+        const decodedArticles = decodeArticles(response.articles);
+
+        return {
+          data: decodedArticles,
+          totalNbrOfResults: response.totalResults || 0,
+        };
+      },
+      merge: getMergeConfig('page'),
+      serializeQueryArgs: getSerializeQueryArgsConfig,
+      forceRefetch({currentArg, previousArg}) {
+        return currentArg?.page !== previousArg?.page;
       },
     }),
   }),
 });
 
-export const {useGetTopHeadlinesQuery, useLazyGetTopHeadlinesQuery} =
-  topHeadNewsApi;
+export const {useFetchPostsQuery, useLazyFetchPostsQuery} = topHeadNewsApi;
 export default topHeadNewsApi;

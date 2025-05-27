@@ -9,6 +9,7 @@
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/react-native": "^13.2.0",
     "eslint-plugin-react-compiler": "^19.0.0-beta-ebf51a3-20250411",
+    "fast-equals": "^5.2.2",
     "i18next": "^25.0.0",
     "lodash.isequal": "^4.5.0",
     "react": "19.0.0",
@@ -24,6 +25,7 @@
     "react-native-svg": "^15.11.2",
     "react-native-toast-message": "^2.3.0",
     "react-redux": "^9.2.0",
+    "reactotron-react-native": "^5.1.13",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
     "zod": "^3.24.3"
