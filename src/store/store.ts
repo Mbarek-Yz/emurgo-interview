@@ -1,15 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { persistStore } from 'redux-persist';
-import { authApi } from '_rtkQuery/api/authApi';
-import { rootReducer } from './rootReducer';
-import postsApi from '_rtkQuery/api/postsApi';
+import {configureStore} from '@reduxjs/toolkit';
+import {persistStore} from 'redux-persist';
+import {rootReducer} from './rootReducer';
+import {topHeadNewsApi} from '_rtkQuery/api/topHeadNewsApi';
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      serializableCheck: false
-    }).concat(authApi.middleware, postsApi.middleware)
+      serializableCheck: false,
+    }).concat(topHeadNewsApi.middleware),
 });
 
 export const persistor = persistStore(store);

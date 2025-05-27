@@ -26,6 +26,9 @@ const en = {
     password_required: 'Pssword required',
     login_failed: 'Login failed',
   },
+  home: {
+    title: 'Top Headlines',
+  },
 };
 
 export default en;
