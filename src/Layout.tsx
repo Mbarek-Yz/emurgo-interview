@@ -1,15 +1,12 @@
-import {View, Text, SafeAreaView} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import React from 'react';
-import {useAppSelector} from '_store/api/store.hooks';
-import {selectUser} from '_store/features/user/userSlice';
-import HomeScreen from '_screens/HomeScreen/HomeScreen';
-import LoginScreen from '_screens/LoginScreen/LoginScreen';
+
+import Navigation from '_navigation/NavigationContainer';
 
 const Layout = () => {
-  const isLoggedIn = useAppSelector(selectUser).isLoggedIn;
   return (
     <SafeAreaView style={{flex: 1}}>
-      <HomeScreen />
+      <Navigation />
     </SafeAreaView>
   );
 };
