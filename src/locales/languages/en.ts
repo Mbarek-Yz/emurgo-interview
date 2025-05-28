@@ -28,6 +28,10 @@ const en = {
   },
   home: {
     title: 'Top Headlines',
+    search_placeholder: 'Search...',
+  },
+  article: {
+    see_more: 'See more >',
   },
 };
 
