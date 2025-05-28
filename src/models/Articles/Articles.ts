@@ -17,7 +17,7 @@ export const decodeArticle = (response: ArticlesResponse): Articles => {
     description: response.description,
     content: response.content,
     url: response.url,
-    image: response.image,
+    image: response.urlToImage,
     publishedAt: response.publishedAt,
     source: decodeSource(response.source),
   };

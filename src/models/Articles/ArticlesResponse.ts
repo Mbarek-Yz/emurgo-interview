@@ -5,7 +5,7 @@ export type ArticlesResponse = {
   description: String;
   content: String;
   url: String;
-  image: String;
+  urlToImage: String;
   publishedAt: String;
   source: SourceResponse;
 };
