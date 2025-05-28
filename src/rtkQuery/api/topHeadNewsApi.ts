@@ -30,17 +30,15 @@ export const topHeadNewsApi = createApi({
         page: number;
         pageSize: number;
         q?: string;
-        from?: string;
         sortBy?: string;
       }
     >({
-      query: ({page, pageSize, q, from, sortBy}) => {
+      query: ({page, pageSize, q, sortBy}) => {
         const params = {
           ...endpoints.DEFAULT_PARAMS,
           page,
           pageSize,
           ...(q && {q}),
-          ...(from && {from}),
           ...(sortBy && {sortBy}),
         };
 
