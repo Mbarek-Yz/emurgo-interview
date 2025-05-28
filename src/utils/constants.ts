@@ -1,4 +1,4 @@
-import {Platform} from 'react-native';
+import {Dimensions, Platform} from 'react-native';
 
 export const DEBOUNCE_DELAY = 500;
 
@@ -18,3 +18,5 @@ export const POST_DIVIDER_HEIGHT = 20;
 export const POST_DIVIDER_WIDTH = 20;
 
 export const EXPIRATION_TOKEN_DELAY_IN_MINUTES = 30;
+
+export const SCREEN_WIDTH = Dimensions.get('window').width;

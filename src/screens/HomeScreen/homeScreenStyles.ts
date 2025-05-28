@@ -1,10 +1,12 @@
+import {colors} from '_utils/colors';
+import {FontSizes} from '_utils/fonts';
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: 'lightgrey',
+    backgroundColor: colors.WHITE_BACKGROUND,
   },
   listContainer: {
     flex: 1,
@@ -15,7 +17,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   header: {
-    fontSize: 18,
+    fontSize: FontSizes.FONT_SIZE_BASE_3,
     fontWeight: 'bold',
     padding: 20,
     backgroundColor: '#f8f8f8',
@@ -32,18 +34,18 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   title: {
-    fontSize: 16,
+    fontSize: FontSizes.FONT_SIZE_BASE_2,
     fontWeight: 'bold',
     marginBottom: 4,
     color: '#333',
   },
   description: {
-    fontSize: 14,
+    fontSize: FontSizes.FONT_SIZE_META_2,
     color: '#666',
     marginBottom: 4,
   },
   source: {
-    fontSize: 12,
+    fontSize: FontSizes.FONT_SIZE_META,
     color: '#999',
     fontStyle: 'italic',
   },

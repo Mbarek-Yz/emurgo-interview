@@ -9,7 +9,7 @@ export const endpoints = {
   TOP_HEADLINES: '/everything',
   DEFAULT_PARAMS: {
     q: 'tesla',
-    from: '2025-04-27',
+    // from: '2025-04-28',
     sortBy: 'publishedAt',
     apiKey: apiKey,
   },
