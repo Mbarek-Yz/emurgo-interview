@@ -29,6 +29,7 @@ const en = {
   home: {
     title: 'Top Headlines',
     search_placeholder: 'Search...',
+    select_language: 'Select language',
   },
   article: {
     see_more: 'See more >',

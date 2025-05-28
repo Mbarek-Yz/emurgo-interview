@@ -12,6 +12,7 @@ import CustomDivider from '_components/CustomDivider/CustomDivider';
 import {HeightDimentions} from '_utils/dimensions';
 import {ARTICLE_DETAILS_SCREEN} from '_utils/screenNames';
 import {navigate} from '_navigation/RootNavigations';
+import {CallPickerLanguage} from '_components/CallPickerLanguage/CallPickerLanguage';
 
 const HomeScreen: React.FC = () => {
   const useLazyFetchPostsQueryResult = useLazyFetchPostsQuery();
@@ -54,6 +55,10 @@ const HomeScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       {/* <Text style={styles.header}>{translate('home.title')}</Text> */}
+      <View style={{alignSelf: 'flex-end', padding: 8}}>
+        <CallPickerLanguage />
+      </View>
+      <CustomDivider height={HeightDimentions.HEIGHT_DIVIDER_2} />
       <CustomSearchBar
         placeholder={translate('home.search_placeholder')}
         text={searchText}
