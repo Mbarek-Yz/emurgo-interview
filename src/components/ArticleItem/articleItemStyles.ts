@@ -35,8 +35,10 @@ const styles = StyleSheet.create({
     color: colors.BLACK,
   },
   seeMore: {
+    color: colors.GREY_MEDIUM,
     fontSize: FontSizes.FONT_SIZE_META,
     alignSelf: 'flex-end',
+    fontWeight: 500,
   },
 });
 

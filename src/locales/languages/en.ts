@@ -44,6 +44,9 @@ const en = {
     welcome_back: 'WELCOME BACK!',
     login: 'Sign In',
   },
+  details: {
+    article_details_screen: 'Article Details Screen',
+  },
 };
 
 export default en;

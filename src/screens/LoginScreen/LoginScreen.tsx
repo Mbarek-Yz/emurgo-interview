@@ -29,7 +29,7 @@ const LoginScreen = () => {
 
   const onLoginPress = async (data: LoginSchemaType) => {
     const {email, password} = data;
-    await handleLogin('Yazan@example.com', 'StrongPassword123');
+    await handleLogin(email, password);
   };
 
   const handleLoginSubmitPress = () => {

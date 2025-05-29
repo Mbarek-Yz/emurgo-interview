@@ -10,6 +10,9 @@ import CustomDivider from '_components/CustomDivider/CustomDivider';
 import {HeightDimentions} from '_utils/dimensions';
 import {colors} from '_utils/colors';
 import {translate} from '_i18n';
+import CustomHeader from '_components/CustomHeader/CustomHeader';
+import {pop} from '_navigation/RootNavigations';
+import {BackIcon} from '_assets/drawables';
 
 type PostDetailsScreenRouteProp = RouteProp<
   HomeStackParamList,
@@ -28,8 +31,17 @@ const ArticleDetailsScreen: React.FC<ArticleDetailsScreenProps> = ({route}) => {
       ? {uri: route.params.image}
       : images.DEFAULT_PLACEHOLDER;
 
+  const onBackPress = () => {
+    pop();
+  };
+
   return (
     <View style={styles.container}>
+      <CustomHeader
+        label={translate('details.article_details_screen')}
+        onLeftIconPress={onBackPress}
+        LeftDotsIconComponent={BackIcon}
+      />
       <View style={styles.imageWrapper}>
         <Image
           source={imageSource}
