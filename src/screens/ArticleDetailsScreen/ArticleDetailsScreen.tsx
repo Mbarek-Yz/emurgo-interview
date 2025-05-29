@@ -29,7 +29,7 @@ const ArticleDetailsScreen: React.FC<ArticleDetailsScreenProps> = ({route}) => {
       : images.DEFAULT_PLACEHOLDER;
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
       <View style={styles.imageWrapper}>
         <Image
           source={imageSource}
@@ -58,15 +58,17 @@ const ArticleDetailsScreen: React.FC<ArticleDetailsScreenProps> = ({route}) => {
       </View>
 
       <View style={styles.infos}>
-        <Text style={styles.title}>{translate('global.description')}</Text>
-        <CustomDivider height={HeightDimentions.HEIGHT_DIVIDER_1} />
-        <Text style={styles.paragraph}>{route.params.description}</Text>
-        <CustomDivider height={HeightDimentions.HEIGHT_DIVIDER_3} />
-        <Text style={styles.title}>{translate('global.content')}</Text>
-        <CustomDivider height={HeightDimentions.HEIGHT_DIVIDER_1} />
-        <Text style={styles.paragraph}>{route.params.content}</Text>
+        <ScrollView showsHorizontalScrollIndicator={false}>
+          <Text style={styles.title}>{translate('global.description')}</Text>
+          <CustomDivider height={HeightDimentions.HEIGHT_DIVIDER_1} />
+          <Text style={styles.paragraph}>{route.params.description}</Text>
+          <CustomDivider height={HeightDimentions.HEIGHT_DIVIDER_3} />
+          <Text style={styles.title}>{translate('global.content')}</Text>
+          <CustomDivider height={HeightDimentions.HEIGHT_DIVIDER_1} />
+          <Text style={styles.paragraph}>{route.params.content}</Text>
+        </ScrollView>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

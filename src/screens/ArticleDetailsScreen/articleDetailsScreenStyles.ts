@@ -1,5 +1,5 @@
 import {colors} from '_utils/colors';
-import {SCREEN_WIDTH} from '_utils/constants';
+import {SCREEN_HEIGHT, SCREEN_WIDTH} from '_utils/constants';
 import {FontSizes} from '_utils/fonts';
 import {StyleSheet} from 'react-native';
 
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   imageWrapper: {
     position: 'relative',
     width: SCREEN_WIDTH,
-    height: 400,
+    height: SCREEN_HEIGHT / 2,
   },
   image: {
     height: '100%',
