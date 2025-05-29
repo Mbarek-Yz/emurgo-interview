@@ -16,6 +16,7 @@ const en = {
     logout: 'Logout',
     popup_logout: 'Are you sure you want to log out?',
     cancel: 'Cancel',
+    content: 'Content:',
   },
   error: {
     error: 'Error',
@@ -27,12 +28,14 @@ const en = {
     login_failed: 'Login failed',
   },
   home: {
-    title: 'Top Headlines',
+    title: 'Welcome Emurgo!',
     search_placeholder: 'Search...',
     select_language: 'Select language',
   },
   article: {
-    see_more: 'See more >',
+    see_more: 'Click to see more',
+    author: 'Author: ',
+    source: 'Souce: ',
   },
 };
 

@@ -31,15 +31,17 @@ export const topHeadNewsApi = createApi({
         pageSize: number;
         q?: string;
         sortBy?: string;
+        language?: string;
       }
     >({
-      query: ({page, pageSize, q, sortBy}) => {
+      query: ({page, pageSize, q, sortBy, language}) => {
         const params = {
           ...endpoints.DEFAULT_PARAMS,
           page,
           pageSize,
           ...(q && {q}),
           ...(sortBy && {sortBy}),
+          ...(language && {language}),
         };
 
         return {
@@ -64,7 +66,10 @@ export const topHeadNewsApi = createApi({
       merge: getMergeConfig('page'),
       serializeQueryArgs: getSerializeQueryArgsConfig,
       forceRefetch({currentArg, previousArg}) {
-        return currentArg?.page !== previousArg?.page;
+        return (
+          currentArg?.page !== previousArg?.page ||
+          currentArg?.language !== previousArg?.language
+        );
       },
     }),
   }),

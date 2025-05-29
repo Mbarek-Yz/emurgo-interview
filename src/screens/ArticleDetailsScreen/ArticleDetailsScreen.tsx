@@ -1,10 +1,16 @@
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, ScrollView} from 'react-native';
 import React, {useState} from 'react';
+import LinearGradient from 'react-native-linear-gradient'; // Import gradient
 import {HomeStackParamList} from '_navigation/HomeStackNavigation';
 import {RouteProp} from '@react-navigation/native';
 import {ARTICLE_DETAILS_SCREEN} from '_utils/screenNames';
 import styles from './articleDetailsScreenStyles';
 import {images} from '_utils/images';
+import CustomDivider from '_components/CustomDivider/CustomDivider';
+import {HeightDimentions} from '_utils/dimensions';
+import {colors} from '_utils/colors';
+import {translate} from '_i18n';
+
 type PostDetailsScreenRouteProp = RouteProp<
   HomeStackParamList,
   typeof ARTICLE_DETAILS_SCREEN
@@ -23,14 +29,44 @@ const ArticleDetailsScreen: React.FC<ArticleDetailsScreenProps> = ({route}) => {
       : images.DEFAULT_PLACEHOLDER;
 
   return (
-    <View>
-      <Image
-        source={imageSource}
-        style={styles.image}
-        resizeMode="cover"
-        onError={() => setImageFailed(true)}
-      />
-    </View>
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.imageWrapper}>
+        <Image
+          source={imageSource}
+          style={styles.image}
+          resizeMode="cover"
+          onError={() => setImageFailed(true)}
+        />
+        <LinearGradient
+          colors={['transparent', colors.BLACK]}
+          style={styles.gradientOverlay}
+          pointerEvents="none">
+          <View style={styles.overlayContent}>
+            <Text style={styles.authorText}>
+              {translate('article.author')} {route.params.author}
+            </Text>
+            <Text style={styles.titleText}>{route.params.title}</Text>
+            <View style={styles.sourceContainer}>
+              <Text style={styles.overlayText}>
+                {translate('article.source')} {route.params.source.name}
+              </Text>
+              <Text style={styles.overlayText}>{route.params.publishedAt}</Text>
+            </View>
+          </View>
+          <CustomDivider height={HeightDimentions.HEIGHT_DIVIDER_5} />
+        </LinearGradient>
+      </View>
+
+      <View style={styles.infos}>
+        <Text style={styles.title}>{translate('global.description')}</Text>
+        <CustomDivider height={HeightDimentions.HEIGHT_DIVIDER_1} />
+        <Text style={styles.paragraph}>{route.params.description}</Text>
+        <CustomDivider height={HeightDimentions.HEIGHT_DIVIDER_3} />
+        <Text style={styles.title}>{translate('global.content')}</Text>
+        <CustomDivider height={HeightDimentions.HEIGHT_DIVIDER_1} />
+        <Text style={styles.paragraph}>{route.params.content}</Text>
+      </View>
+    </ScrollView>
   );
 };
 

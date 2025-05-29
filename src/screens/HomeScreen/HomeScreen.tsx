@@ -1,5 +1,5 @@
 import React, {JSX, useEffect} from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
+import {View, ActivityIndicator, Text} from 'react-native';
 import {useLazyFetchPostsQuery} from '_rtkQuery/api/topHeadNewsApi';
 import {translate} from '_i18n';
 import useCustomPaginationQuery from '_rtkQuery/hooks/useCustomPaginationQuery';
@@ -13,10 +13,15 @@ import {HeightDimentions} from '_utils/dimensions';
 import {ARTICLE_DETAILS_SCREEN} from '_utils/screenNames';
 import {navigate} from '_navigation/RootNavigations';
 import {CallPickerLanguage} from '_components/CallPickerLanguage/CallPickerLanguage';
+import {SelectLocaleLanguage} from '_store/features/localeLanguage/LocaleLanguageSlice';
+import {useAppSelector} from '_store/api/store.hooks';
+import {LocaleLanguage} from '_utils/enums';
 
 const HomeScreen: React.FC = () => {
   const useLazyFetchPostsQueryResult = useLazyFetchPostsQuery();
   const {debouncedSearchText, searchText, setSearchText} = useSearch();
+  const language: LocaleLanguage | null =
+    useAppSelector(SelectLocaleLanguage).language;
 
   const {
     data,
@@ -30,11 +35,12 @@ const HomeScreen: React.FC = () => {
     loadingMoreError,
   } = useCustomPaginationQuery(useLazyFetchPostsQueryResult, {
     q: searchText,
+    language,
   });
 
   useEffect(() => {
     getRefreshedData();
-  }, [debouncedSearchText]);
+  }, [debouncedSearchText, language]);
 
   const renderItem = ({item}: {item: any}): JSX.Element => {
     const onPostPress = () => {
@@ -54,10 +60,10 @@ const HomeScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.header}>{translate('home.title')}</Text> */}
       <View style={{alignSelf: 'flex-end', padding: 8}}>
         <CallPickerLanguage />
       </View>
+      <Text style={styles.header}>{translate('home.title')}</Text>
       <CustomDivider height={HeightDimentions.HEIGHT_DIVIDER_2} />
       <CustomSearchBar
         placeholder={translate('home.search_placeholder')}

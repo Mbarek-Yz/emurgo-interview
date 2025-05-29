@@ -2,6 +2,7 @@ import {Source, decodeSource} from '_models/Source/Source';
 import {ArticlesResponse} from './ArticlesResponse';
 
 export type Articles = {
+  author: String;
   title: String;
   description: String;
   content: String;
@@ -13,6 +14,7 @@ export type Articles = {
 
 export const decodeArticle = (response: ArticlesResponse): Articles => {
   return {
+    author: response.author,
     title: response.title,
     description: response.description,
     content: response.content,

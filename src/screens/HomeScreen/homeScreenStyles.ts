@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: FontSizes.FONT_SIZE_BASE_3,
     fontWeight: 'bold',
-    padding: 20,
+    paddingVertical: 10,
     backgroundColor: '#f8f8f8',
   },
   itemContainer: {
