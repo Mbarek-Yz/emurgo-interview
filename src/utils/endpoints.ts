@@ -1,6 +1,7 @@
 import {env} from '_env';
 
 export const BASE_URL = env.SERVER_BASE_URL;
+export const BASE_URL_LOCAL = env.SERVER_BASE_URL;
 
 const apiKey = 'ab1ac7f703c14d6e8584d146a43dba60';
 

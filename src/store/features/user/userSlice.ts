@@ -3,8 +3,7 @@ import {RootState} from '_store/store';
 import {Profiler} from 'react';
 
 type UserProfileData = {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
 };
 

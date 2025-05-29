@@ -37,6 +37,12 @@ const en = {
     author: 'Author: ',
     source: 'Souce: ',
   },
+  login_screen: {
+    username_placeholer: 'Username',
+    password_placeholer: 'Password',
+    welcome_back: 'WELCOME BACK!',
+    login: 'Sign In',
+  },
 };
 
 export default en;

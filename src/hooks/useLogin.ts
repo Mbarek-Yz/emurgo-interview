@@ -7,11 +7,11 @@ import {useDispatch} from 'react-redux';
 const useLogin = () => {
   const [login] = useLoginMutation();
   const dispatch = useDispatch<UserSliceDispatch>();
-  const handleLogin = async (username: string, password: string) => {
+  const handleLogin = async (email: string, password: string) => {
     dispatch(showLoader());
 
     try {
-      const result = await login({username, password}).unwrap();
+      const result = await login({email, password}).unwrap();
       await userAuthenticate(dispatch, result);
     } catch (error) {
       console.log(error, ' in useLogin');

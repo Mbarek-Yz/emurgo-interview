@@ -7,6 +7,7 @@ import {navigationRef} from '_navigation/RootNavigations';
 import {useAppSelector} from '_store/api/store.hooks';
 import {selectUser} from '_store/features/user/userSlice';
 import HomeStackNavigation from './HomeStackNavigation';
+import LoginScreen from '_screens/LoginScreen/LoginScreen';
 
 /**
  * Returns the navigation container that englobe App navigation
@@ -19,7 +20,7 @@ function Navigation(): JSX.Element {
   return (
     <SafeAreaProvider>
       <NavigationContainer ref={navigationRef}>
-        <HomeStackNavigation />
+        {isLoggedIn ? <HomeStackNavigation /> : <LoginScreen />}
       </NavigationContainer>
     </SafeAreaProvider>
   );

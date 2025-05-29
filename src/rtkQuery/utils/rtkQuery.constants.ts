@@ -22,11 +22,8 @@ export const BEARER_TOKEN = 'Bearer';
 
 export const baseQueryConfig = fetchBaseQuery({
   baseUrl: env.SERVER_BASE_URL,
-  /* prepareHeaders: async headers => {
-    const token = await getAccessToken();
-    if (token) {
-      headers.set(AUTHORIZATION, `${BEARER_TOKEN}${token}`);
-    }
-    return headers;
-  }, */
+});
+
+export const baseQueryConfigLocal = fetchBaseQuery({
+  baseUrl: env.SERVER_BASE_URL_LOCAL,
 });

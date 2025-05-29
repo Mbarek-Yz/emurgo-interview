@@ -12,10 +12,7 @@ export const BUTTON_PAYMENT_BOUNCE_RATE = 3000;
 
 export const FLAT_LIST_ON_END_REACHED_THRESHOLD = 0.4;
 
-export const SHARED_PREFERENCES_NAME = 'casualFoundryTest';
-
-export const POST_DIVIDER_HEIGHT = 20;
-export const POST_DIVIDER_WIDTH = 20;
+export const SHARED_PREFERENCES_NAME = 'interview';
 
 export const EXPIRATION_TOKEN_DELAY_IN_MINUTES = 30;
 

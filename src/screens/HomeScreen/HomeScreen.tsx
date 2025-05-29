@@ -1,5 +1,5 @@
 import React, {JSX, useEffect} from 'react';
-import {View, ActivityIndicator, Text} from 'react-native';
+import {View, ActivityIndicator, Text, Button} from 'react-native';
 import {useLazyFetchPostsQuery} from '_rtkQuery/api/topHeadNewsApi';
 import {translate} from '_i18n';
 import useCustomPaginationQuery from '_rtkQuery/hooks/useCustomPaginationQuery';
@@ -14,10 +14,16 @@ import {ARTICLE_DETAILS_SCREEN} from '_utils/screenNames';
 import {navigate} from '_navigation/RootNavigations';
 import {CallPickerLanguage} from '_components/CallPickerLanguage/CallPickerLanguage';
 import {SelectLocaleLanguage} from '_store/features/localeLanguage/LocaleLanguageSlice';
-import {useAppSelector} from '_store/api/store.hooks';
+import {useAppDispatch, useAppSelector} from '_store/api/store.hooks';
 import {LocaleLanguage} from '_utils/enums';
+import {userLogout} from '_services/authenticationService';
+import {showPopup} from '_utils/helpers/helpers';
+import {LogoutIcon} from '_assets/drawables';
+import {colors} from '_utils/colors';
+import HomeHeader from '_components/HomeHeader/HomeHeader';
 
 const HomeScreen: React.FC = () => {
+  const dispatch = useAppDispatch();
   const useLazyFetchPostsQueryResult = useLazyFetchPostsQuery();
   const {debouncedSearchText, searchText, setSearchText} = useSearch();
   const language: LocaleLanguage | null =
@@ -58,8 +64,26 @@ const HomeScreen: React.FC = () => {
     return <ActivityIndicator size="large" style={styles.center} />;
   }
 
+  const onLogoutPress = async () => {
+    await userLogout(dispatch);
+  };
+
+  const handleIconPress = () => {
+    showPopup({
+      title: translate('global.popup_logout'),
+      confirmCallback: onLogoutPress,
+      isGlobal: true,
+      confirmText: translate('global.logout'),
+      cancelText: translate('global.cancel'),
+    });
+  };
+
   return (
     <View style={styles.container}>
+      <HomeHeader
+        onIconPress={handleIconPress}
+        icon={<LogoutIcon stroke={colors.PRIMARY} />}
+      />
       <View style={{alignSelf: 'flex-end', padding: 8}}>
         <CallPickerLanguage />
       </View>
