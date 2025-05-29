@@ -6,13 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const persistUserConfig: PersistConfig<UserState, Action> = {
   key: 'user',
   storage: AsyncStorage,
-  whitelist: [
-    'isLoggedIn',
-    'isAuthenticationLoading',
-    'firstName',
-    'lastName',
-    'email',
-  ],
+  whitelist: ['isLoggedIn', 'isAuthenticationLoading', 'profile'],
 };
 
 export const persistedUserReducer = persistReducer(

@@ -1,5 +1,5 @@
 import React, {JSX, useEffect} from 'react';
-import {View, ActivityIndicator, Text, Button} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 import {useLazyFetchPostsQuery} from '_rtkQuery/api/topHeadNewsApi';
 import {translate} from '_i18n';
 import useCustomPaginationQuery from '_rtkQuery/hooks/useCustomPaginationQuery';
@@ -21,6 +21,7 @@ import {showPopup} from '_utils/helpers/helpers';
 import {LogoutIcon} from '_assets/drawables';
 import {colors} from '_utils/colors';
 import HomeHeader from '_components/HomeHeader/HomeHeader';
+import {selectUser} from '_store/features/user/userSlice';
 
 const HomeScreen: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -28,6 +29,9 @@ const HomeScreen: React.FC = () => {
   const {debouncedSearchText, searchText, setSearchText} = useSearch();
   const language: LocaleLanguage | null =
     useAppSelector(SelectLocaleLanguage).language;
+
+  const user = useAppSelector(selectUser);
+  const username = user?.profile?.name;
 
   const {
     data,
@@ -81,13 +85,14 @@ const HomeScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <HomeHeader
+        username={username}
         onIconPress={handleIconPress}
         icon={<LogoutIcon stroke={colors.PRIMARY} />}
       />
-      <View style={{alignSelf: 'flex-end', padding: 8}}>
+      <CustomDivider height={HeightDimentions.HEIGHT_DIVIDER_2} />
+      <View style={styles.languagePickerContainer}>
         <CallPickerLanguage />
       </View>
-      <Text style={styles.header}>{translate('home.title')}</Text>
       <CustomDivider height={HeightDimentions.HEIGHT_DIVIDER_2} />
       <CustomSearchBar
         placeholder={translate('home.search_placeholder')}
@@ -108,7 +113,7 @@ const HomeScreen: React.FC = () => {
           failedError={failedError}
           loadingMoreError={loadingMoreError}
           ItemSeparatorComponent={renderItemSeparator}
-          // keyExtractor={(item, index) => item?.url || index.toString()}
+          keyExtractor={(item, index) => item?.url || index.toString()}
         />
       </View>
     </View>

@@ -28,9 +28,10 @@ const en = {
     login_failed: 'Login failed',
   },
   home: {
-    title: 'Welcome Emurgo!',
     search_placeholder: 'Search...',
     select_language: 'Select language',
+    welcome: 'Welcome to Emurgo!',
+    hi: 'Hi,',
   },
   article: {
     see_more: 'Click to see more',

@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     fontSize: FontSizes.FONT_SIZE_BASE_3,
     fontWeight: 'bold',
     paddingVertical: 10,
-    backgroundColor: '#f8f8f8',
   },
   itemContainer: {
     padding: 16,
@@ -48,6 +47,9 @@ const styles = StyleSheet.create({
     fontSize: FontSizes.FONT_SIZE_META,
     color: '#999',
     fontStyle: 'italic',
+  },
+  languagePickerContainer: {
+    alignSelf: 'flex-end',
   },
 });
 

@@ -1,6 +1,5 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {RootState} from '_store/store';
-import {Profiler} from 'react';
 
 type UserProfileData = {
   name: string;

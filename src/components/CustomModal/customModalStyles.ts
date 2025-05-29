@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
     borderColor: colors.GREY_MEDIUM,
   },
   button: {
-    width: 12,
-    height: 12,
+    width: 20,
+    height: 20,
   },
   header: {
     width: '100%',
