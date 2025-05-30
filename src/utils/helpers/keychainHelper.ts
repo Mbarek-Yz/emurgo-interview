@@ -11,7 +11,7 @@ export const setSecureStorage = async (
 ): Promise<void> => {
   try {
     await Keychain.setGenericPassword('token', value, {
-      service: key, // Use the key as the "service" name to namespace entries
+      service: key,
     });
   } catch (error) {
     console.error(`Failed to save value for ${key}`, error);

@@ -1,6 +1,6 @@
 import {View, Text, Image, ScrollView} from 'react-native';
 import React, {useState} from 'react';
-import LinearGradient from 'react-native-linear-gradient'; // Import gradient
+import LinearGradient from 'react-native-linear-gradient';
 import {HomeStackParamList} from '_navigation/HomeStackNavigation';
 import {RouteProp} from '@react-navigation/native';
 import {ARTICLE_DETAILS_SCREEN} from '_utils/screenNames';
